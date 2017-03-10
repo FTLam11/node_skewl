@@ -17,3 +17,5 @@ function unique(sortedCollection) {
   };
   return unique;
 };
+
+// use && operator on two objects OP as fuck
