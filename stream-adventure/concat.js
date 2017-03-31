@@ -1,13 +1,12 @@
-var http = require('http');
-var port = process.argv[2];
-var server = http.createServer(function(req, res) {
-  if (req.method != 'POST') return res.end('POSTS ONLY NOOB');
-  var payload = '';
-  req.on('data', function(chunk) {
-    payload += chunk;
+var text = '';
+
+process.stdin
+  .setEncoding('utf8')
+  .on('readable', function() {
+    var chunk = process.stdin.read();
+    if (!chunk) return;
+    text += chunk;
   })
-  req.on('end', function() {
-    res.end(payload.toUpperCase());
+  .on('end', function() {
+    process.stdout.write(text.split('').reverse().join(''));
   })
-});
-server.listen(port);
